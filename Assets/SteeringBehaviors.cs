@@ -36,7 +36,7 @@ public class SteeringBehaviors : MonoBehaviour
         Seek(target.transform.position + target.transform.forward * lookAhead * 5);
     }
 
-    void Evade()
+    public void Evade()
     {
         Vector3 targetDiff = target.transform.position - this.transform.position;
         float lookAhead = targetDiff.magnitude / (agent.speed + target.GetComponent<Drive>().currentSpeed);
@@ -48,7 +48,7 @@ public class SteeringBehaviors : MonoBehaviour
         Flee(target.transform.position + target.transform.forward * lookAhead * 5);
     }
     Vector3 wanderTarget = Vector3.zero;
-    void Wander()
+    public void Wander()
     {
         float wanderRadius = 10;
         float wanderDistance = 20;
@@ -72,7 +72,7 @@ public class SteeringBehaviors : MonoBehaviour
         return hidingSpots;
     }
 
-    void Hide()
+    public void Hide()
     {
         float closestDistance = Mathf.Infinity;
         Vector3 chosenSpot = Vector3.zero;
