@@ -18,7 +18,7 @@ public class CopBehaviour : MonoBehaviour
             _characterBehaviours = this.GetComponent<CharacterBehaviours>();
             _characterUtils = this.GetComponent<CharacterUtils>();
         }
-        catch (Exception exception)
+        catch
         {
             throw new Exception("Missing components Character Behaviours and Characters Utils");
         }
@@ -28,15 +28,14 @@ public class CopBehaviour : MonoBehaviour
     {
         _closestRobber = _characterUtils.GetClosestRobber();
         
-        //if there is no robbers then it only wander
-        if (!_closestRobber)
-        {
-            _characterBehaviours.Wander();
-            return;
-        }
+        //if there's no robbers, then the game is over.
+        if (!_closestRobber) return;
 
+
+        float distanceFromRobber = Vector3.Distance(_closestRobber.transform.position, this.transform.position);
+        
         //it will start pursuing the closest robber if is in the range
-        if (Vector3.Distance(_closestRobber.transform.position, this.transform.position) < pursueRobberRange)
+        if (distanceFromRobber < pursueRobberRange)
         {
             _characterBehaviours.Pursue(_closestRobber);
         }

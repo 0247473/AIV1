@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PedestrianBehaviour : MonoBehaviour
@@ -17,9 +18,9 @@ public class PedestrianBehaviour : MonoBehaviour
             _characterBehaviours = this.GetComponent<CharacterBehaviours>();
             _characterUtils = this.GetComponent<CharacterUtils>();
         }
-        catch (System.Exception exception)
+        catch
         {
-            throw new System.Exception("Missing components Character Behaviours and Characters Utils");
+            throw new Exception("Missing components Character Behaviours and Characters Utils");
         }
     }
 
@@ -35,13 +36,20 @@ public class PedestrianBehaviour : MonoBehaviour
         }
 
         // If the thief is within the flee range, flee
-        if (Vector3.Distance(_closestThief.transform.position, this.transform.position) < fleeFromThiefRange)
-        {
+        float distanceFromThief = Vector3.Distance(_closestThief.transform.position, this.transform.position);
+        
+        if (distanceFromThief < fleeFromThiefRange)
             _characterBehaviours.Flee(_closestThief.transform.position);
-        }
         else
-        {
             _characterBehaviours.Wander();
+    }
+    
+    //Pedestrian Capture
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Robber"))
+        {
+            Destroy(this.gameObject);
         }
     }
 }

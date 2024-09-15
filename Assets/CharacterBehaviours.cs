@@ -22,33 +22,33 @@ public class CharacterBehaviours : MonoBehaviour
         _agent.SetDestination(this.transform.position - locationDirection);
     }
 
-public void Pursue(GameObject target)
-{
-    if (target == null)
+    public void Pursue(GameObject target)
     {
-        Debug.LogError("Target is null in Pursue method.");
-        return;
+        if (target == null)
+        {
+            Debug.LogError("Target is null in Pursue method.");
+            return;
+        }
+
+        Vector3 targetDiff = target.transform.position - this.transform.position;
+        float lookAhead = targetDiff.magnitude / (this._agent.speed + 1); // Use a default speed value if needed
+
+        Seek(target.transform.position + target.transform.forward * lookAhead * 5);
     }
-
-    Vector3 targetDiff = target.transform.position - this.transform.position;
-    float lookAhead = targetDiff.magnitude / (this._agent.speed + 1); // Use a default speed value if needed
-
-    Seek(target.transform.position + target.transform.forward * lookAhead * 5);
-}
 
    public void Evade(GameObject target)
-{
-    if (target == null)
     {
-        Debug.LogError("Target is null in Evade method.");
-        return;
+        if (target == null)
+        {
+            Debug.LogError("Target is null in Evade method.");
+            return;
+        }
+
+        Vector3 targetDiff = target.transform.position - this.transform.position;
+        float lookAhead = targetDiff.magnitude / (this._agent.speed + 1); // Use a default speed value if needed
+
+        Flee(target.transform.position + target.transform.forward * lookAhead * 5);
     }
-
-    Vector3 targetDiff = target.transform.position - this.transform.position;
-    float lookAhead = targetDiff.magnitude / (this._agent.speed + 1); // Use a default speed value if needed
-
-    Flee(target.transform.position + target.transform.forward * lookAhead * 5);
-}
     public void Wander()
     {
         float wanderRadius = 10;
