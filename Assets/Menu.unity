@@ -1434,8 +1434,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Your mission is to catch all the thieves before time runs out. To catch
-    a thief, you just need to touch him. Work fast, before the capture all the pedetrians
-    and break free of you
+    a thief, you just need to touch him. Work fast, before they escape
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
